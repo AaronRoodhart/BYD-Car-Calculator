@@ -168,27 +168,44 @@ function setupCustomSelect() {
  * Main calculation function
  */
 function calculate() {
-    const modelSelect = document.getElementById('modelSelect');
-    const selectedIndex = modelSelect.value;
-    
-    if (selectedIndex === '') {
-        document.getElementById('resultsPanel').style.display = 'none';
-        return;
+    try {
+        const modelSelect = document.getElementById('modelSelect');
+        const selectedIndex = modelSelect.value;
+        
+        if (selectedIndex === '' || selectedIndex === null) {
+            alert('Please select a BYD model first');
+            document.getElementById('resultsPanel').style.display = 'none';
+            return;
+        }
+
+        const modelIndex = parseInt(selectedIndex);
+        if (isNaN(modelIndex) || modelIndex < 0 || modelIndex >= modelsData.length) {
+            alert('Invalid model selection. Please select a model again.');
+            return;
+        }
+
+        const model = modelsData[modelIndex];
+        if (!model) {
+            alert('Model data not found. Please refresh the page.');
+            return;
+        }
+
+        const priceOverrideInput = document.getElementById('priceOverride').value;
+        const priceOverride = priceOverrideInput ? parseFloat(priceOverrideInput) : null;
+        const isExportModel = document.getElementById('exportModel').checked;
+
+        // Update model export status
+        const modelWithExport = { ...model, export_model: isExportModel };
+
+        // Perform calculation (2025 rates based on price and battery capacity)
+        const result = calculator.calculate(modelWithExport, priceOverride);
+
+        // Display results
+        displayResults(result);
+    } catch (error) {
+        console.error('Calculation error:', error);
+        alert('An error occurred during calculation. Please check the console for details.');
     }
-
-    const model = modelsData[parseInt(selectedIndex)];
-    const priceOverrideInput = document.getElementById('priceOverride').value;
-    const priceOverride = priceOverrideInput ? parseFloat(priceOverrideInput) : null;
-    const isExportModel = document.getElementById('exportModel').checked;
-
-    // Update model export status
-    const modelWithExport = { ...model, export_model: isExportModel };
-
-    // Perform calculation (2025 rates based on price and battery capacity)
-    const result = calculator.calculate(modelWithExport, priceOverride);
-
-    // Display results
-    displayResults(result);
 }
 
 /**
