@@ -8,7 +8,7 @@ const modelsData = [
     {
         "name": "BYD Dolphin Standard Range",
         "price": 449900,
-        "battery_capacity_kwh": 50.25,
+        "battery_capacity_kwh": 44.9,
         "fuel_type": "BEV",
         "export_model": false,
         "eligible_rebate": true,
