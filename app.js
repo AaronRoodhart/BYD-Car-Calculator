@@ -67,10 +67,19 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCustomSelect();
     
     // Set up event listeners
-    document.getElementById('calculateBtn').addEventListener('click', calculate);
-    document.getElementById('modelSelect').addEventListener('change', () => {
-        // Keep in sync with custom select
-    });
+    const calculateBtn = document.getElementById('calculateBtn');
+    if (calculateBtn) {
+        calculateBtn.addEventListener('click', calculate);
+    } else {
+        console.error('Calculate button not found!');
+    }
+    
+    const modelSelect = document.getElementById('modelSelect');
+    if (modelSelect) {
+        modelSelect.addEventListener('change', () => {
+            // Keep in sync with custom select
+        });
+    }
 });
 
 /**
