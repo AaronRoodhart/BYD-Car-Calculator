@@ -177,7 +177,6 @@ function calculate() {
     }
 
     const model = modelsData[parseInt(selectedIndex)];
-    const year = parseInt(document.getElementById('yearSelect').value);
     const priceOverrideInput = document.getElementById('priceOverride').value;
     const priceOverride = priceOverrideInput ? parseFloat(priceOverrideInput) : null;
     const isExportModel = document.getElementById('exportModel').checked;
@@ -185,8 +184,8 @@ function calculate() {
     // Update model export status
     const modelWithExport = { ...model, export_model: isExportModel };
 
-    // Perform calculation
-    const result = calculator.calculate(modelWithExport, year, priceOverride);
+    // Perform calculation (2025 rates based on price and battery capacity)
+    const result = calculator.calculate(modelWithExport, priceOverride);
 
     // Display results
     displayResults(result);

@@ -11,42 +11,28 @@ class EVSubsidyCalculator {
   }
 
   /**
-   * Calculate consumer rebate based on price, battery capacity, and year
+   * Calculate consumer rebate based on price and battery capacity (2025 rates)
    * @param {number} price - Base price in THB
    * @param {number} batteryCapacity - Battery capacity in kWh
-   * @param {number} year - Year (2024, 2025, 2026, or 2027)
    * @param {boolean} eligibleRebate - Whether model is eligible for rebate
    * @returns {number} Subsidy amount in THB
    */
-  calculateConsumerRebate(price, batteryCapacity, year, eligibleRebate) {
+  calculateConsumerRebate(price, batteryCapacity, eligibleRebate) {
+    // No subsidy for cars over 2M THB
     if (!eligibleRebate || price > this.SUBSIDY_THRESHOLD) {
       return 0;
     }
 
-    const isHighCapacity = batteryCapacity >= 50;
-    let subsidy = 0;
-
-    if (isHighCapacity) {
-      // Battery ≥ 50 kWh
-      if (year === 2024) {
-        subsidy = 100000;
-      } else if (year === 2025) {
-        subsidy = 75000;
-      } else if (year === 2026 || year === 2027) {
-        subsidy = 50000;
-      }
+    // 2025 Subsidy Rates:
+    // - Battery ≥ 50 kWh: ฿75,000
+    // - Battery 10 kWh to < 50 kWh: ฿35,000
+    if (batteryCapacity >= 50) {
+      return 75000;
     } else if (batteryCapacity >= 10) {
-      // Battery 10 kWh to < 50 kWh
-      if (year === 2024) {
-        subsidy = 50000;
-      } else if (year === 2025) {
-        subsidy = 35000;
-      } else if (year === 2026 || year === 2027) {
-        subsidy = 25000;
-      }
+      return 35000;
     }
 
-    return subsidy;
+    return 0;
   }
 
   /**
@@ -63,21 +49,19 @@ class EVSubsidyCalculator {
   }
 
   /**
-   * Calculate final price with all subsidies applied
+   * Calculate final price with all subsidies applied (2025 rates)
    * @param {Object} model - Model object with price, battery_capacity_kwh, etc.
-   * @param {number} year - Year for subsidy calculation
    * @param {number|null} overridePrice - Optional price override
    * @returns {Object} Calculation results
    */
-  calculate(model, year = 2024, overridePrice = null) {
+  calculate(model, overridePrice = null) {
     const basePrice = overridePrice !== null ? overridePrice : model.price;
     const batteryCapacity = model.battery_capacity_kwh || 0;
     
-    // Consumer rebate
+    // Consumer rebate (2025 rates based on price and battery capacity)
     const consumerRebate = this.calculateConsumerRebate(
       basePrice,
       batteryCapacity,
-      year,
       model.eligible_rebate
     );
 
@@ -103,7 +87,6 @@ class EVSubsidyCalculator {
       priceAfterSubsidy,
       finalPrice,
       totalSavings,
-      year,
       model: model.name,
       batteryCapacity,
       fuelType: model.fuel_type,
