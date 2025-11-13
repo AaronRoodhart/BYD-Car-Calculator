@@ -90,7 +90,6 @@ class EVSubsidyCalculator {
       model: model.name,
       batteryCapacity,
       fuelType: model.fuel_type,
-      exportModel: model.export_model || false,
       eligibleRebate: model.eligible_rebate,
       eligibleExcise: model.eligible_excise
     };

@@ -211,15 +211,9 @@ function calculate() {
         const priceOverrideElement = document.getElementById('priceOverride');
         const priceOverrideInput = priceOverrideElement ? priceOverrideElement.value : '';
         const priceOverride = priceOverrideInput ? parseFloat(priceOverrideInput) : null;
-        
-        const exportModelElement = document.getElementById('exportModel');
-        const isExportModel = exportModelElement ? exportModelElement.checked : false;
-
-        // Update model export status
-        const modelWithExport = { ...model, export_model: isExportModel };
 
         // Perform calculation (2025 rates based on price and battery capacity)
-        const result = calculator.calculate(modelWithExport, priceOverride);
+        const result = calculator.calculate(model, priceOverride);
 
         // Display results
         displayResults(result);
@@ -361,16 +355,6 @@ function displayIncentives(result) {
         true
     );
     incentivesGrid.appendChild(corporateTaxBadge);
-
-    // Export Credit
-    if (result.exportModel) {
-        const exportBadge = createIncentiveBadge(
-            '🌍',
-            'Export Credit: 1.5 units',
-            true
-        );
-        incentivesGrid.appendChild(exportBadge);
-    }
 }
 
 /**
