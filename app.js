@@ -179,11 +179,20 @@ function setupCustomSelect() {
 function calculate() {
     try {
         const modelSelect = document.getElementById('modelSelect');
+        if (!modelSelect) {
+            console.error('modelSelect element not found');
+            alert('Error: Model selection element not found. Please refresh the page.');
+            return;
+        }
+        
         const selectedIndex = modelSelect.value;
         
         if (selectedIndex === '' || selectedIndex === null) {
             alert('Please select a BYD model first');
-            document.getElementById('resultsPanel').style.display = 'none';
+            const resultsPanel = document.getElementById('resultsPanel');
+            if (resultsPanel) {
+                resultsPanel.style.display = 'none';
+            }
             return;
         }
 
@@ -199,9 +208,12 @@ function calculate() {
             return;
         }
 
-        const priceOverrideInput = document.getElementById('priceOverride').value;
+        const priceOverrideElement = document.getElementById('priceOverride');
+        const priceOverrideInput = priceOverrideElement ? priceOverrideElement.value : '';
         const priceOverride = priceOverrideInput ? parseFloat(priceOverrideInput) : null;
-        const isExportModel = document.getElementById('exportModel').checked;
+        
+        const exportModelElement = document.getElementById('exportModel');
+        const isExportModel = exportModelElement ? exportModelElement.checked : false;
 
         // Update model export status
         const modelWithExport = { ...model, export_model: isExportModel };
