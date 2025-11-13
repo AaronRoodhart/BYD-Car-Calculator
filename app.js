@@ -26,7 +26,7 @@ const modelsData = [
         "image": "Dolphin Extended Range. .webp"
     },
     {
-        "name": "BYD Seal AWD Performance",
+        "name": "BYD Seal",
         "price": 1174900,
         "battery_capacity_kwh": 82.5,
         "fuel_type": "BEV",
@@ -36,7 +36,7 @@ const modelsData = [
         "image": "Dolphins seal.jpeg"
     },
     {
-        "name": "BYD Atto 3 Extended Range",
+        "name": "BYD Atto 3",
         "price": 999900,
         "battery_capacity_kwh": 60.5,
         "fuel_type": "BEV",
