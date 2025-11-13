@@ -1,0 +1,51 @@
+{
+  "models": [
+    {
+      "name": "BYD Dolphin Standard Range",
+      "price": 449900,
+      "battery_capacity_kwh": 50.25,
+      "fuel_type": "BEV",
+      "export_model": false,
+      "eligible_rebate": true,
+      "eligible_excise": true
+    },
+    {
+      "name": "BYD Dolphin Extended Range",
+      "price": 569900,
+      "battery_capacity_kwh": 60.5,
+      "fuel_type": "BEV",
+      "export_model": false,
+      "eligible_rebate": true,
+      "eligible_excise": true
+    },
+    {
+      "name": "BYD Seal AWD Performance",
+      "price": 1174900,
+      "battery_capacity_kwh": 82.5,
+      "fuel_type": "BEV",
+      "export_model": false,
+      "eligible_rebate": true,
+      "eligible_excise": true
+    },
+    {
+      "name": "BYD Atto 3 Extended Range",
+      "price": 999900,
+      "battery_capacity_kwh": 60.5,
+      "fuel_type": "BEV",
+      "export_model": false,
+      "eligible_rebate": true,
+      "eligible_excise": true
+    },
+    {
+      "name": "BYD Han",
+      "price": 2499000,
+      "battery_capacity_kwh": 85.4,
+      "fuel_type": "BEV",
+      "export_model": false,
+      "eligible_rebate": false,
+      "eligible_excise": true,
+      "note": "Price unverified - may be special order only"
+    }
+  ]
+}
+

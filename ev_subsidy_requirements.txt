@@ -1,0 +1,120 @@
+EV Subsidy Calculator Requirements Document
+
+1. Overview
+Build a web based EV cost calculator that determines the final consumer price of a BYD electric vehicle in Thailand after applying all eligible subsidies, excise tax reductions, and incentives under Thailand’s EV 3 point 5 policy.
+
+The user selects a BYD model, and the system automatically applies all logic to:
+• determine which subsidies apply
+• calculate the final consumer cost
+• display each subsidy individually
+• show manufacturer and government incentives as informational badges
+
+The app should support both desktop and mobile browsers.
+
+2. Core Features
+2.1 Model selection
+The user selects from a list of BYD models sold in Thailand.
+
+Models must include:
+• BYD Dolphin
+• BYD Seal
+• BYD Atto 3
+• BYD Han
+• BYD Tang
+
+Each model must have:
+• model name
+• base price in THB
+• fuel type (BEV or PHEV)
+• export model flag
+• subsidy eligibility values
+
+Models stored in a JSON structure.
+
+3. Data Structure (JSON)
+Example:
+{
+  "models": [
+    {
+      "name": "BYD Dolphin",
+      "price": 859999,
+      "eligible_rebate": false,
+      "eligible_excise": true,
+      "export_model": false
+    },
+    ...
+  ]
+}
+
+4. Calculation Logic
+4.1 Consumer rebate
+Rebate is seventy five thousand THB if:
+model.price > 2000000 AND eligible_rebate = true
+
+4.2 Excise tax reduction
+All BEVs receive two percent excise tax reduction.
+
+Formula:
+excise_discount = (base_price minus subsidy_cash) times 0.02
+
+4.3 Import duty exemption
+Informational only:
+"Import duty exemption applied: yes"
+
+4.4 Corporate tax incentives
+Informational only:
+"Corporate income tax exemption: eight years plus five years at fifty percent"
+
+4.5 Export credit
+If export_model = true:
+production_credit = 1.5 units
+
+4.6 Final price
+price_after_subsidy = base minus subsidy
+price_after_excise = price_after_subsidy minus (price_after_subsidy times 0.02)
+final_price = round(price_after_excise, 2)
+
+5. Output Requirements
+Show:
+• Base price
+• Subsidy amount
+• Excise discount
+• Final price
+
+Also list incentives:
+• rebate eligibility
+• excise reduction
+• import duty exemption
+• tax incentives
+• export credit if applicable
+
+6. UI Requirements
+Inputs:
+• model dropdown
+• optional override price
+• toggle for export model
+
+Outputs:
+• final price
+• price breakdown
+• incentive badges
+
+Styling: clean minimal layout.
+
+7. Additional Requirements
+Project must include:
+• model JSON file
+• calculation utility
+• model selection UI
+• results display component
+
+Architecture:
+• modular functions
+• calculation engine separate from UI
+• full type definitions if using TS
+
+8. Optional Features
+• before and after price chart
+• EU export savings calculator
+• compare models side by side
+• charging cost savings per year

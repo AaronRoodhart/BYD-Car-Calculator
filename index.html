@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BYD EV Subsidy Calculator - Thailand</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BYD EV Subsidy Calculator</h1>
+            <p class="subtitle">Calculate your savings with Thailand EV 3.5 Policy incentives</p>
+        </header>
+
+        <main>
+            <div class="calculator-section">
+                <div class="input-panel">
+                    <h2>Select Your Vehicle</h2>
+                    
+                    <div class="form-group">
+                        <label for="modelSelect">BYD Model</label>
+                        <div class="custom-select-wrapper">
+                            <div class="custom-select" id="customSelect">
+                                <div class="custom-select-trigger">
+                                    <span class="select-placeholder">-- Select a model --</span>
+                                    <span class="select-arrow">▼</span>
+                                </div>
+                                <div class="custom-select-options" id="customSelectOptions">
+                                    <!-- Options will be inserted here -->
+                                </div>
+                            </div>
+                            <select id="modelSelect" class="form-control" style="display: none;">
+                                <option value="">-- Select a model --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yearSelect">Year</label>
+                        <select id="yearSelect" class="form-control">
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priceOverride">
+                            Custom Price (THB)
+                            <span class="hint">Leave empty to use model's base price</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="priceOverride" 
+                            class="form-control" 
+                            placeholder="Enter custom price"
+                            min="0"
+                        >
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="exportModel">
+                            <span>Export Model</span>
+                        </label>
+                    </div>
+
+                    <button id="calculateBtn" class="calculate-button">Calculate Price</button>
+                </div>
+
+                <div class="results-panel" id="resultsPanel" style="display: none;">
+                    <h2>Price Breakdown</h2>
+                    
+                    <div class="price-display">
+                        <div class="final-price">
+                            <span class="label">Final Price</span>
+                            <span class="value" id="finalPrice">-</span>
+                            <div class="currency-note">Prices shown in THB and CAD</div>
+                        </div>
+                        <div class="savings-badge" id="savingsBadge">
+                            <span>Total Savings: </span>
+                            <span id="totalSavings">-</span>
+                        </div>
+                    </div>
+
+                    <div class="breakdown">
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Base Price</span>
+                            <span class="breakdown-value" id="basePrice">-</span>
+                        </div>
+                        <div class="breakdown-item subsidy">
+                            <span class="breakdown-label">
+                                Consumer Rebate
+                                <span class="badge" id="rebateBadge">Applied</span>
+                            </span>
+                            <span class="breakdown-value negative" id="consumerRebate">-</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="breakdown-label">Price After Rebate</span>
+                            <span class="breakdown-value" id="priceAfterSubsidy">-</span>
+                        </div>
+                        <div class="breakdown-item subsidy">
+                            <span class="breakdown-label">
+                                Excise Tax Discount (2%)
+                                <span class="badge" id="exciseBadge">Applied</span>
+                            </span>
+                            <span class="breakdown-value negative" id="exciseDiscount">-</span>
+                        </div>
+                    </div>
+
+                    <div class="subsidies-section">
+                        <h3>Subsidies Applied</h3>
+                        <div id="subsidiesSection">
+                            <!-- Subsidies will be inserted here -->
+                        </div>
+                    </div>
+
+                    <div class="model-info">
+                        <h3>Model Information</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Battery Capacity</span>
+                                <span class="info-value" id="batteryCapacity">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Fuel Type</span>
+                                <span class="info-value" id="fuelType">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="incentives-section">
+                        <h3>Additional Incentives</h3>
+                        <div class="incentives-grid" id="incentivesGrid">
+                            <!-- Incentive badges will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Based on Thailand EV 3.5 Policy (2024-2027)</p>
+            <p class="disclaimer">Prices and subsidies are estimates. Please verify with official sources.</p>
+        </footer>
+    </div>
+
+    <script src="calculator.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
